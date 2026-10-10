@@ -35,6 +35,9 @@ jobs:
           java -version
           python -c "import pyspark; print('pyspark', pyspark.__version__)"
 
-      # With Java and PySpark present the Spark parity tests run instead of skipping.
+      # FAIL_ON_SKIP (see tests/conftest.py) turns any skipped test into a failure,
+      # so a missing JVM/PySpark can't quietly skip the Spark parity tests.
       - name: Run tests
+        env:
+          FAIL_ON_SKIP: "1"
         run: pytest tests -q -rs

@@ -19,6 +19,27 @@ N_DEVICES = 300
 N_SESSIONS = 4000
 
 
+def pytest_sessionfinish(session, exitstatus):
+    """
+    With FAIL_ON_SKIP=1, any skipped test fails the run.
+
+    CI sets this so a missing JVM/PySpark can't silently turn the Spark parity
+    tests into skips while the build stays green. Collection-level skips
+    (importorskip, module-level pytest.skip) are counted too.
+    """
+    if os.environ.get("FAIL_ON_SKIP") != "1" or exitstatus != 0:
+        return
+    reporter = session.config.pluginmanager.get_plugin("terminalreporter")
+    skipped = reporter.stats.get("skipped", []) if reporter else []
+    if skipped:
+        reporter.write_sep("=", f"FAIL_ON_SKIP: {len(skipped)} skipped test(s)",
+                           red=True, bold=True)
+        for report in skipped:
+            reason = report.longrepr[2] if isinstance(report.longrepr, tuple) else report.longrepr
+            reporter.write_line(f"  {report.nodeid or '<module>'}: {reason}")
+        session.exitstatus = pytest.ExitCode.TESTS_FAILED
+
+
 @pytest.fixture(scope="session")
 def small_run(tmp_path_factory):
     """Generate a small dataset, run the Pandas ETL, return paths and frames."""
