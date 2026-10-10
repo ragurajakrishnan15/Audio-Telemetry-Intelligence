@@ -1,5 +1,7 @@
 # Audio Telemetry Intelligence Platform
 
+[![CI](https://github.com/ragurajakrishnan15/Audio-Telemetry-Intelligence/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ragurajakrishnan15/Audio-Telemetry-Intelligence/actions/workflows/ci.yml)
+
 **End-to-end data science pipeline for analyzing large-scale audio device telemetry — from raw session data through ETL, statistical analysis, ML modeling, and interactive dashboards.**
 
 Built as a portfolio project mapping to the requirements of a *Data Scientist, Audio Telemetry Intelligence* role.
@@ -36,7 +38,7 @@ audio-telemetry-intelligence/
 │   ├── test_models.py               # Models, statistics, segment naming
 │   ├── test_config.py               # Config loading, adjustment time series
 │   └── test_spark_parity.py         # Spark vs Pandas parity (skipped without a JVM)
-├── .github/workflows/ci.yml         # pytest on push / PR
+├── .github/workflows/ci.yml         # pytest (Java 17 + PySpark; fails on any skip) on push / PR
 ├── Makefile                         # install | pipeline | test | dashboard | clean
 ├── run_pipeline.py                  # Master orchestrator
 ├── requirements.txt                 # Core, pinned to tested versions
@@ -159,7 +161,7 @@ varies slightly between a Spark run and a Pandas run; segment sizes and statisti
 | Spark ↔ Pandas parity | Verified on all 477,514 sessions and 49,998 devices: identical row sets, **0** mismatches in categorical features, `primary_audio_mode` and `day_of_week`; numeric differences ≤ 0.01 (rounding mode) |
 | `sql_analytics.py` | All 5 queries execute on the full dataset; results spot-checked (cohort sizes, decile counts, NULL handling) |
 | Dashboard (all 4 pages) | Rendered headlessly without errors |
-| Tests | 82 passing (including 4 Spark parity tests), 0 skipped |
+| Tests | 82 passing (including 4 Spark parity tests), 0 skipped; CI runs them on Linux with `FAIL_ON_SKIP=1`, so a skipped test fails the build |
 
 Tested with Python 3.11, Java 17 (Temurin) and PySpark 3.5.3 alongside pandas 3.0 / numpy 2.4.
 
