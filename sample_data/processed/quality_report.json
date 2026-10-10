@@ -1,0 +1,15 @@
+{
+  "total_raw": 40000,
+  "nulls": {
+    "session_id": 0,
+    "device_id": 0,
+    "session_start": 0,
+    "duration_seconds": 0,
+    "audio_mode": 0
+  },
+  "duplicates": 0,
+  "range_violations": 0,
+  "outliers_removed": 1785,
+  "clean_count": 38215,
+  "quality_score": 95.54
+}

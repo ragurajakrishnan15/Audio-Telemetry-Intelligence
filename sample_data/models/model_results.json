@@ -1,0 +1,207 @@
+{
+  "anc_predictor": {
+    "mae": 0.0698,
+    "rmse": 0.0863,
+    "r2_score": 0.8801,
+    "cv_r2_mean": 0.8836,
+    "cv_r2_std": 0.0025,
+    "train_samples": 12000,
+    "test_samples": 3001
+  },
+  "user_segmentation": {
+    "n_clusters": 3,
+    "silhouette_score": 0.1694,
+    "inertia": 31795.98,
+    "silhouette_all": {
+      "3": 0.1694,
+      "4": 0.1575,
+      "5": 0.1377,
+      "6": 0.1337,
+      "7": 0.1317,
+      "8": 0.1252
+    }
+  },
+  "anomaly_detection": {
+    "total_sessions": 38215,
+    "anomalies_detected": 1911,
+    "anomaly_rate": 0.05,
+    "contamination_param": 0.05
+  },
+  "duration_forecaster": {
+    "mae_seconds": 682.4,
+    "rmse_seconds": 1064.7,
+    "r2_score": -0.0163,
+    "median_abs_error_seconds": 397.4
+  },
+  "statistical_analysis": {
+    "anc_environment_anova": {
+      "f_statistic": 400.3343,
+      "p_value": 0.0,
+      "significant": true,
+      "eta_squared": 0.1938,
+      "effect_size": "large",
+      "n": 15001,
+      "interpretation": "Significant difference in satisfaction across environments"
+    },
+    "hourly_patterns": {
+      "session_count": {
+        "0": 1652,
+        "1": 1607,
+        "2": 1594,
+        "3": 1628,
+        "4": 1563,
+        "5": 1562,
+        "6": 1571,
+        "7": 1639,
+        "8": 1574,
+        "9": 1580,
+        "10": 1548,
+        "11": 1604,
+        "12": 1513,
+        "13": 1644,
+        "14": 1606,
+        "15": 1622,
+        "16": 1577,
+        "17": 1522,
+        "18": 1629,
+        "19": 1584,
+        "20": 1640,
+        "21": 1619,
+        "22": 1568,
+        "23": 1569
+      },
+      "avg_duration": {
+        "0": 947.55,
+        "1": 947.21,
+        "2": 918.33,
+        "3": 972.35,
+        "4": 978.3,
+        "5": 960.1,
+        "6": 935.09,
+        "7": 991.27,
+        "8": 1003.23,
+        "9": 974.39,
+        "10": 978.46,
+        "11": 994.43,
+        "12": 955.08,
+        "13": 993.13,
+        "14": 975.15,
+        "15": 962.0,
+        "16": 929.29,
+        "17": 934.11,
+        "18": 999.16,
+        "19": 955.83,
+        "20": 995.1,
+        "21": 982.98,
+        "22": 989.31,
+        "23": 989.0
+      },
+      "avg_satisfaction": {
+        "0": 68.24,
+        "1": 68.18,
+        "2": 67.96,
+        "3": 68.27,
+        "4": 68.31,
+        "5": 68.01,
+        "6": 68.12,
+        "7": 68.31,
+        "8": 68.52,
+        "9": 68.28,
+        "10": 68.23,
+        "11": 68.38,
+        "12": 68.1,
+        "13": 68.49,
+        "14": 68.31,
+        "15": 68.5,
+        "16": 68.11,
+        "17": 68.12,
+        "18": 68.13,
+        "19": 68.45,
+        "20": 68.38,
+        "21": 68.25,
+        "22": 68.52,
+        "23": 68.29
+      }
+    },
+    "device_satisfaction_kruskal": {
+      "h_statistic": 2460.7435,
+      "p_value": 0.0,
+      "devices_compared": [
+        "AirPods_Pro",
+        "AppleWatch_Ultra2",
+        "iPhone_16_Pro",
+        "AirPods_Max",
+        "iPad_Pro_M4",
+        "HomePod_2",
+        "iPhone_15_Pro",
+        "MacBook_Pro_16",
+        "AppleTV_4K",
+        "VisionPro"
+      ],
+      "significant": true,
+      "epsilon_squared": 0.0642,
+      "effect_size": "medium",
+      "n": 38215
+    }
+  },
+  "cluster_profiles": {
+    "Standard Users": {
+      "size": 2073,
+      "pct": 41.5,
+      "avg_sessions_per_day": 0.02,
+      "avg_session_duration_min": 15.6,
+      "avg_satisfaction": 66.7,
+      "preferred_anc": 0.026
+    },
+    "ANC-Heavy Listeners": {
+      "size": 1398,
+      "pct": 28.0,
+      "avg_sessions_per_day": 0.02,
+      "avg_session_duration_min": 17.5,
+      "avg_satisfaction": 71.4,
+      "preferred_anc": 0.402
+    },
+    "High-Activity Users": {
+      "size": 1527,
+      "pct": 30.6,
+      "avg_sessions_per_day": 0.03,
+      "avg_session_duration_min": 15.9,
+      "avg_satisfaction": 67.6,
+      "preferred_anc": 0.108
+    }
+  },
+  "anomaly_comparison": {
+    "latency_ms": {
+      "anomalous_mean": 41.28,
+      "normal_mean": 13.63,
+      "ratio": 3.03
+    },
+    "audio_glitches": {
+      "anomalous_mean": 0.87,
+      "normal_mean": 0.27,
+      "ratio": 3.23
+    },
+    "satisfaction_proxy": {
+      "anomalous_mean": 72.36,
+      "normal_mean": 68.06,
+      "ratio": 1.06
+    },
+    "audio_quality_index": {
+      "anomalous_mean": 40.91,
+      "normal_mean": 68.97,
+      "ratio": 0.59
+    }
+  },
+  "anc_feature_importance": {
+    "ambient_noise_db": 0.9447868067640814,
+    "battery_drain_rate_pct_hr": 0.012383652030959582,
+    "duration_seconds": 0.008964604183901314,
+    "volume_level": 0.008437722862877277,
+    "latency_ms": 0.0074413181614281084,
+    "anc_demand_score": 0.006051015634832045,
+    "hour_of_day": 0.0038308865165700944,
+    "audio_mode_enc": 0.002467911572057713,
+    "environment_type_enc": 0.0019186276145423229,
+    "day_of_week": 0.0017029036211756881
+  }
+}

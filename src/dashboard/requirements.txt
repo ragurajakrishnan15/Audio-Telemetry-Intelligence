@@ -1,0 +1,9 @@
+# Dependencies for the Streamlit dashboard only (used by Streamlit Community
+# Cloud, which prefers a requirements file next to the entrypoint). The full
+# pipeline's dependencies live in the repo-root requirements.txt.
+# Pinned to the versions the project was tested with (Python 3.11).
+streamlit==1.65.0
+pandas==3.0.6
+numpy==2.4.6
+pyarrow==25.0.1
+plotly==7.1.0

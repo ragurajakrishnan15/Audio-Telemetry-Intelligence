@@ -30,13 +30,18 @@ audio-telemetry-intelligence/
 │   ├── analysis/
 │   │   └── sql_analytics.py         # Advanced SQL analytics (PySpark SQL)
 │   └── dashboard/
-│       └── app.py                   # Streamlit interactive dashboard
+│       ├── app.py                   # Streamlit interactive dashboard
+│       └── requirements.txt         # Dashboard-only dependencies (used by hosting)
+├── scripts/
+│   └── build_sample_data.py         # Rebuilds the bundled demo dataset
+├── sample_data/                     # Small committed dataset (~40K sessions) for the hosted dashboard
 ├── tests/
 │   ├── conftest.py                  # Small end-to-end fixture shared by the suites
 │   ├── test_pipeline.py             # Data generation and data quality
 │   ├── test_etl.py                  # Feature logic, quality scoring, aggregations
 │   ├── test_models.py               # Models, statistics, segment naming
 │   ├── test_config.py               # Config loading, adjustment time series
+│   ├── test_dashboard.py            # Dashboard renders from the bundled sample
 │   └── test_spark_parity.py         # Spark vs Pandas parity (skipped without a JVM)
 ├── .github/workflows/ci.yml         # pytest (Java 17 + PySpark; fails on any skip) on push / PR
 ├── Makefile                         # install | pipeline | test | dashboard | clean
@@ -129,6 +134,19 @@ Cohort retention is `NULL` (not 0%) for windows that extend past the end of the 
 Four pages: **Overview** (KPIs, device mix, satisfaction by environment, hourly pattern),
 **Model Insights** (metrics, feature importance, segments, anomalies), **Data Quality**
 (quality report, null analysis, distributions), **Explorer** (filter by device/environment/mode, custom scatter plots).
+
+### Hosted deployment (Streamlit Community Cloud)
+
+The dashboard falls back to `sample_data/` (a ~40K-session dataset, 4.7 MB) when `data/` doesn't exist,
+and shows a "Demo dataset" banner, so it works on a fresh clone or hosted deploy with no pipeline run.
+
+1. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub.
+2. **New app** → repository `ragurajakrishnan15/Audio-Telemetry-Intelligence`, branch `main`,
+   main file `src/dashboard/app.py`.
+3. **Advanced settings → Python version: 3.11** (the version the pins were tested on).
+4. Deploy. Dependencies come from `src/dashboard/requirements.txt` (streamlit, pandas, numpy, pyarrow, plotly only).
+
+Rebuild the sample after changing the generator or ETL: `python scripts/build_sample_data.py`.
 
 ## Quick Start
 

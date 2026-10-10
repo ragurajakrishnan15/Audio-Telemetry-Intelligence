@@ -35,23 +35,36 @@ BASE_DIR = os.path.join(os.path.dirname(__file__), "..", "..")
 PROCESSED = os.path.join(BASE_DIR, "data", "processed")
 MODELS = os.path.join(BASE_DIR, "data", "models")
 
+# Small bundled dataset (built by scripts/build_sample_data.py). Used when the
+# full pipeline hasn't been run, e.g. on a fresh clone or a hosted deployment.
+SAMPLE_PROCESSED = os.path.join(BASE_DIR, "sample_data", "processed")
+SAMPLE_MODELS = os.path.join(BASE_DIR, "sample_data", "models")
+
+
+def _data_dirs() -> tuple[str, str, bool]:
+    """Return (processed_dir, models_dir, is_sample)."""
+    if os.path.exists(os.path.join(PROCESSED, "sessions.parquet")):
+        return PROCESSED, MODELS, False
+    return SAMPLE_PROCESSED, SAMPLE_MODELS, True
+
 
 @st.cache_data
 def load_data():
-    data = {}
+    processed, models, is_sample = _data_dirs()
+    data = {"is_sample": is_sample}
     for name in ["sessions", "hourly_agg", "device_profile", "env_analysis"]:
-        path = os.path.join(PROCESSED, f"{name}.parquet")
+        path = os.path.join(processed, f"{name}.parquet")
         if os.path.exists(path):
             data[name] = pd.read_parquet(path)
 
     # Load model results
-    results_path = os.path.join(MODELS, "model_results.json")
+    results_path = os.path.join(models, "model_results.json")
     if os.path.exists(results_path):
         with open(results_path) as f:
             data["model_results"] = json.load(f)
 
     # Load quality report
-    quality_path = os.path.join(PROCESSED, "quality_report.json")
+    quality_path = os.path.join(processed, "quality_report.json")
     if os.path.exists(quality_path):
         with open(quality_path) as f:
             data["quality_report"] = json.load(f)
@@ -342,6 +355,13 @@ def exploration_page(data: dict):
 
 def main():
     data = load_data()
+
+    if data.get("is_sample"):
+        st.info(
+            "**Demo dataset** — you're viewing a small bundled sample "
+            "(synthetic data, ~40K sessions). Run `python run_pipeline.py` "
+            "to analyze the full 500K-session dataset locally."
+        )
 
     st.sidebar.title("Navigation")
     page = st.sidebar.radio(
