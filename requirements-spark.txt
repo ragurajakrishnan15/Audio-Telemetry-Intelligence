@@ -1,0 +1,8 @@
+# Optional — enables spark_etl.py and `run_pipeline.py --step sql`.
+# Requires a Java 8/11/17 runtime on PATH (Temurin 17 was used for testing).
+#
+# Verified working alongside the pinned pandas 3.0.6 / numpy 2.4.6 in
+# requirements.txt (PySpark emits Pandas4Warning deprecation notices from
+# toPandas(); they are harmless). Without PySpark the pipeline falls back to
+# pandas_etl.py automatically.
+pyspark==3.5.3

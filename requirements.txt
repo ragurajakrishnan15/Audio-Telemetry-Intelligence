@@ -1,0 +1,15 @@
+# Core pipeline, models and dashboard — pinned to the versions the project
+# was run and tested against (Python 3.11).
+pandas==3.0.6
+numpy==2.4.6
+scikit-learn==1.9.1
+scipy==1.17.1
+pyarrow==25.0.1
+joblib==1.6.0
+faker==40.43.0
+pyyaml==6.0.3
+plotly==7.1.0
+streamlit==1.65.0
+pytest==9.1.1
+
+# Optional: distributed ETL + SQL analytics. See requirements-spark.txt.

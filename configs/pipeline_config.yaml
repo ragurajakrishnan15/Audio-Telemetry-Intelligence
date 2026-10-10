@@ -1,0 +1,32 @@
+# Pipeline configuration — loaded by src/config.py.
+# Paths are relative to the project root. Values here override the defaults
+# in src/config.py; omitted keys fall back to those defaults.
+
+data_generation:
+  num_devices: 50000
+  num_sessions: 500000
+  date_range:
+    start: "2024-01-01"
+    end: "2024-12-31"
+
+pipeline:
+  raw_data_path: "data/raw"
+  processed_data_path: "data/processed"
+  model_output_path: "data/models"
+  spark:
+    app_name: "AudioTelemetryPipeline"
+    master: "local[*]"
+    shuffle_partitions: 8
+    driver_memory: "4g"
+  quality_checks:
+    iqr_multiplier: 3.0        # outlier fences: Q1 - k*IQR, Q3 + k*IQR on duration_seconds
+
+models:
+  sample_size: 100000          # sessions sampled for model training
+  anc_predictor:               # GradientBoostingRegressor
+    test_size: 0.2
+    random_state: 42
+  user_segmentation:
+    max_clusters: 6            # upper bound; silhouette analysis picks k in [3, 8]
+  anomaly_detection:           # IsolationForest
+    contamination: 0.05
