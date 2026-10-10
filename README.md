@@ -32,6 +32,8 @@ audio-telemetry-intelligence/
 │   └── dashboard/
 │       ├── app.py                   # Streamlit interactive dashboard
 │       └── requirements.txt         # Dashboard-only dependencies (used by hosting)
+├── site/
+│   └── index.html                   # Static landing page (GitHub Pages)
 ├── scripts/
 │   └── build_sample_data.py         # Rebuilds the bundled demo dataset
 ├── sample_data/                     # Small committed dataset (~40K sessions) for the hosted dashboard
@@ -44,6 +46,7 @@ audio-telemetry-intelligence/
 │   ├── test_dashboard.py            # Dashboard renders from the bundled sample
 │   └── test_spark_parity.py         # Spark vs Pandas parity (skipped without a JVM)
 ├── .github/workflows/ci.yml         # pytest (Java 17 + PySpark; fails on any skip) on push / PR
+├── .github/workflows/pages.yml      # Publishes site/ to GitHub Pages
 ├── Makefile                         # install | pipeline | test | dashboard | clean
 ├── run_pipeline.py                  # Master orchestrator
 ├── requirements.txt                 # Core, pinned to tested versions
@@ -134,6 +137,13 @@ Cohort retention is `NULL` (not 0%) for windows that extend past the end of the 
 Four pages: **Overview** (KPIs, device mix, satisfaction by environment, hourly pattern),
 **Model Insights** (metrics, feature importance, segments, anomalies), **Data Quality**
 (quality report, null analysis, distributions), **Explorer** (filter by device/environment/mode, custom scatter plots).
+
+### Project website
+
+`site/index.html` is a single, dependency-free landing page (no build step, no external requests).
+`.github/workflows/pages.yml` publishes it to GitHub Pages on pushes that touch `site/`; enable it once under
+**Settings → Pages → Source: GitHub Actions**. After deploying the dashboard, set `DEMO_URL` at the bottom
+of `site/index.html` to reveal the "Open the live dashboard" button.
 
 ### Hosted deployment (Streamlit Community Cloud)
 
