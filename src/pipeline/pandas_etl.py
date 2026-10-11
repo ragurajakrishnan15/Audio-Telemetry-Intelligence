@@ -156,8 +156,10 @@ class AudioTelemetryPipelinePandas:
         s = dfs["sessions"]
 
         # Hourly rollup
-        s["date"] = s["session_ts"].dt.date
-        hourly = s.groupby(["date", "hour_of_day", "device_type"]).agg(
+        # Group on a temporary Series so no `date` column leaks into sessions.
+        hourly = s.groupby(
+            [s["session_ts"].dt.date.rename("date"), "hour_of_day", "device_type"]
+        ).agg(
             session_count=("session_id", "count"),
             avg_duration_sec=("duration_seconds", "mean"),
             avg_anc_level=("anc_level", "mean"),

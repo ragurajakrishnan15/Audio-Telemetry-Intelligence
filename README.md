@@ -167,7 +167,7 @@ python run_pipeline.py --step all      # generate → ETL → models (→ SQL if
 python run_pipeline.py --step generate # or any single step: etl | models | sql
 
 streamlit run src/dashboard/app.py
-pytest tests/ -v                       # 77 tests in a few seconds
+pytest tests/ -v                       # 90 tests, under a minute
 ```
 
 A full run takes about 2–4 minutes on a laptop (≈2 min with the Pandas ETL, ≈3.5 min with Spark).
@@ -189,7 +189,7 @@ varies slightly between a Spark run and a Pandas run; segment sizes and statisti
 | Spark ↔ Pandas parity | Verified on all 477,514 sessions and 49,998 devices: identical row sets, **0** mismatches in categorical features, `primary_audio_mode` and `day_of_week`; numeric differences ≤ 0.01 (rounding mode) |
 | `sql_analytics.py` | All 5 queries execute on the full dataset; results spot-checked (cohort sizes, decile counts, NULL handling) |
 | Dashboard (all 4 pages) | Rendered headlessly without errors |
-| Tests | 82 passing (including 4 Spark parity tests), 0 skipped; CI runs them on Linux with `FAIL_ON_SKIP=1`, so a skipped test fails the build |
+| Tests | 90 passing (including 4 Spark parity tests), 0 skipped; CI runs them on Linux with `FAIL_ON_SKIP=1`, so a skipped test fails the build |
 
 Tested with Python 3.11, Java 17 (Temurin) and PySpark 3.5.3 alongside pandas 3.0 / numpy 2.4.
 

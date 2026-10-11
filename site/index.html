@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Audio Telemetry Intelligence</title>
 <meta name="description" content="An end-to-end data science pipeline for large-scale audio device telemetry.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* CSS Reset and Variables */
 :root {
@@ -24,7 +21,7 @@
   --radius: 24px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-family: 'Outfit', sans-serif; background: var(--bg-color); color: var(--text-main); }
+html { scroll-behavior: smooth; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: var(--bg-color); color: var(--text-main); }
 body { overflow-x: hidden; position: relative; }
 
 /* Dynamic Background setup */
@@ -219,7 +216,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; max-width: 600px; margi
     <div class="stat"><b>500K</b><span>Sessions</span></div>
     <div class="stat"><b>95.5%</b><span>Quality Score</span></div>
     <div class="stat"><b>0</b><span>Data Mismatches</span></div>
-    <div class="stat"><b>85</b><span>Tests Passed</span></div>
+    <div class="stat"><b>90</b><span>Tests Passed</span></div>
   </div>
 </div>
 
@@ -237,7 +234,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; max-width: 600px; margi
     </div>
 
     <div class="cards reveal delay-3">
-      <div class="card glass-panel"><div class="k">Dual Engines</div><h3>Pandas & PySpark</h3><p>The same ETL logic implemented in both. Verified 100% identical on all 477,514 cleaned sessions, apart from machine rounding variations.</p></div>
+      <div class="card glass-panel"><div class="k">Dual Engines</div><h3>Pandas & PySpark</h3><p>The same ETL logic implemented in both. Verified 100% identical on all 477,514 cleaned sessions and 49,998 devices, apart from machine rounding variations.</p></div>
       <div class="card glass-panel"><div class="k">Data Quality</div><h3>Validated, Not Assumed</h3><p>Strict null, duplicate, range and IQR outlier checks produce a comprehensive quality report with 22,486 anomalies filtered.</p></div>
       <div class="card glass-panel"><div class="k">Advanced SQL</div><h3>Windows & Cohorts</h3><p>Five sophisticated Spark SQL queries tracking relative rankings, retention cohorts, LAG-based degradation, funnels, and deciles.</p></div>
       <div class="card glass-panel"><div class="k">CI/CD</div><h3>Tested & Automated</h3><p>85 granular Unit & E2E tests enforcing build success. CI pipelines fail aggressively on any skipped tests ensuring reliability.</p></div>
@@ -317,13 +314,13 @@ footer p { color: var(--text-muted); font-size: 0.85rem; max-width: 600px; margi
 <footer>
   <div class="wrap">
     <p><a href="https://github.com/ragurajakrishnan15/Audio-Telemetry-Intelligence" target="_blank" rel="noopener">GitHub Repository</a></p>
-    <p>An independent portfolio project operating over synthetic arrays. Unaffiliated with real-world entities.</p>
+    <p>An independent portfolio project operating over synthetic arrays. Not affiliated with any real-world company or product.</p>
   </div>
 </footer>
 
 <script>
   // Deploy URL Integration
-  const DEMO_URL = "";
+  var DEMO_URL = "";
   if (DEMO_URL) {
     const link = document.getElementById("demo-link");
     link.href = DEMO_URL; 
